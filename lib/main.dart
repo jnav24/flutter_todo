@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import './home.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
+import 'package:flutter_todo/models/model.dart';
+import 'package:flutter_todo/redux/actions.dart';
+import 'package:flutter_todo/redux/reducers.dart';
+import 'package:flutter_todo/home.dart';
 
 void main() => runApp(MyApp());
 
