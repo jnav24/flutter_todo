@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './home.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,10 +11,7 @@ class MyApp extends StatelessWidget {
 			theme: ThemeData(
 				primarySwatch: Colors.blue,
 			),
-			home: Scaffold(
-				appBar: AppBar(title: Text('Todo App')),
-				body: Text('Placeholder'),
-			),
+			home: Home(),
 		);
 	}
 }
