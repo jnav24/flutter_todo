@@ -4,6 +4,10 @@ import 'package:redux/redux.dart';
 import 'package:flutter_todo/models/model.dart';
 import 'package:flutter_todo/redux/actions.dart';
 import 'package:flutter_todo/redux/reducers.dart';
+import 'package:flutter_todo/add_item_widget.dart';
+import 'package:flutter_todo/item_list_widget.dart';
+import 'package:flutter_todo/remove_items_button.dart';
+import 'package:flutter_todo/models/view_model.dart';
 
 class Home extends StatelessWidget {
 	@override
@@ -12,9 +16,9 @@ class Home extends StatelessWidget {
 			appBar: AppBar(
 				title: Text('Todo List'),
 			),
-			body: StoreConnector<AppState, _ViewModel>(
-				converter: (Store<AppState> store) => _ViewModel.create(store),
-				builder: (BuildContext context, _ViewModel viewModel) => Column(
+			body: StoreConnector<AppState, ViewModel>(
+				converter: (Store<AppState> store) => ViewModel.create(store),
+				builder: (BuildContext context, ViewModel viewModel) => Column(
 					children: <Widget>[
 						AddItemWidget(viewModel),
 						Expanded(
@@ -24,41 +28,6 @@ class Home extends StatelessWidget {
 					],
 				),
 			),
-		);
-	}
-}
-
-class _ViewModel {
-	final List<Item> items;
-	final Function(String) onAddItem;
-	final Function(Item) onRemoveItem;
-	final Function() onRemoveItems;
-
-	_ViewModel({
-		this.items,
-		this.onAddItem,
-		this.onRemoveItem,
-		this.onRemoveItems,
-	});
-
-	factory _ViewModel.create(Store<AppState> store) {
-		_onAddItem(String body) {
-			store.dispatch(AddItemAction(body));
-		}
-
-		_onRemoveItem(Item item) {
-			store.dispatch(RemoveItemAction(item));
-		}
-
-		_onRemoveItems() {
-			store.dispatch(RemoveItemsAction());
-		}
-
-		return _ViewModel(
-			items: store.state.items,
-			onAddItem: _onAddItem,
-			onRemoveItem: _onRemoveItem,
-			onRemoveItems: _onRemoveItems,
 		);
 	}
 }
