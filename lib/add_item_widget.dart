@@ -11,8 +11,19 @@ class AddItemWidget extends StatefulWidget {
 }
 
 class _AddItemState extends State<AddItemWidget> {
+	final TextEditingController controller = TextEditingController();
+
 	@override
 	Widget build(BuildContext context) {
-    	return Column();
+    	return TextField(
+			controller: controller,
+			decoration: InputDecoration(
+				hintText: 'Add an Item',
+			),
+			onSubmitted: (String s) {
+				widget.model.onAddItem(s);
+				controller.text = '';
+			},
+		);
   	}
 }
